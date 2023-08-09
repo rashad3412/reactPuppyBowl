@@ -1,0 +1,23 @@
+.pets {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  height: 100%;
+  text-align: center;
+}
+.singleP {
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100%;
+  text-align: center;
+}
+
+.navBar {
+  display: flex;
+  padding: 10px;
+  justify-content: space-around;
+}
