@@ -10,9 +10,10 @@ const App = () => {
     <>
       <nav className="navBar">
         <Link to="/">Home</Link>
-        <Link to="/players/:id">Player</Link>
+        <Link to="/players/:id"></Link>
       </nav>
       <NewPlayerForm />
+
       <Routes>
         <Route path="/" element={<AllPlayers />} />
         <Route path="/players/:id" element={<SinglePlayer />} />

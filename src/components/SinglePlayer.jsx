@@ -1,33 +1,32 @@
 import { useNavigate } from "react-router-dom";
-import fetchAllPlayers from "../Api";
+import { fetchSinglePlayers } from "../Api";
 import { useState, useEffect } from "react";
-const SinglePlayer = () => {
-  const [singleP, setSingleP] = useState([]);
-
+const SinglePlayer = ({ id, handleButtonClick }) => {
+  const [singleP, setSingleP] = useState(null);
+  console.log(id);
+  console.log(handleButtonClick);
   useEffect(() => {
-    const playerContainer = async () => {
-      const data = await fetchAllPlayers();
-      setSingleP(data);
-    };
-    playerContainer();
-  }, []);
+    if (id) {
+      const playerContainer = async () => {
+        const data = await fetchSinglePlayers(id);
+        setSingleP(data);
+      };
+      playerContainer();
+    }
+  }, [id]);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleButtonClick = (id) => {
-    navigate(navigate(`/players/${id}`));
-  };
+  // const handleButtonClick = ({ singlePuppy }) => {
+  //   navigate(navigate(`/players/${singlePuppy}`));
+  // };
   return (
-    <div>
-      {singleP.map((player) => {
-        return (
-          <div className="singleP" key={player.id}>
-            <img src={player.imageUrl} width="200px" height="250px" />
-            <button onClick={handleButtonClick}>{player.breed}</button>
-            <h1>{player.name}</h1>
-          </div>
-        );
-      })}
+    <div className="pets" key={singleP?.id}>
+      <h1>{singleP?.name}</h1>
+      <img src={singleP?.imageUrl} width="200px" height="250px" />
+      <button onClick={() => handleButtonClick(singleP?.id)}>
+        {singleP?.breed}
+      </button>
     </div>
   );
 };

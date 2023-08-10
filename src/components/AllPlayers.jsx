@@ -1,4 +1,5 @@
-import fetchAllPlayers from "../Api";
+import { fetchAllPlayers } from "../Api";
+import SinglePlayer from "./SinglePlayer";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +10,7 @@ const AllPlayers = () => {
   useEffect(() => {
     const playerContainer = async () => {
       const data = await fetchAllPlayers();
+      console.log(data);
       setPlayers(data);
     };
     playerContainer();
@@ -17,20 +19,20 @@ const AllPlayers = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = (id) => {
-    navigate(navigate(`/players/${id}`));
+    navigate(`/players/${id}`);
   };
 
   return (
     // Mapping over each player
     <div>
-      {players.map((player) => {
+      {players?.map((player) => {
+        console.log(player);
         return (
-          <div className="pets" key={player.id}>
-            <h1>{player.name}</h1>
-            <img src={player.imageUrl} width="200px" height="250px" />
-            <button onClick={handleButtonClick}>{player.breed}</button>
-            <button>x</button>
-          </div>
+          <SinglePlayer
+            key={player.id}
+            id={player.id}
+            handleButtonClick={handleButtonClick}
+          />
         );
       })}
     </div>
