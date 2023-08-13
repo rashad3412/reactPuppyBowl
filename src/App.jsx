@@ -1,11 +1,22 @@
 // import React from "react";
 import { Route, Routes, Link } from "react-router-dom";
+import { fetchAllPlayers } from "./Api";
 import AllPlayers from "./components/AllPlayers";
-import SinglePlayer from "./components/SinglePlayer";
+import PlayerDetail from "./PlayerDetail";
 import NewPlayerForm from "./components/NewPlayerForm";
 import "./index.css";
+import { useState, useEffect } from "react";
 
 const App = () => {
+  const [players, setPlayers] = useState([]);
+  useEffect(() => {
+    const playerContainer = async () => {
+      const data = await fetchAllPlayers();
+      setPlayers(data);
+    };
+    playerContainer();
+  }, []);
+
   return (
     <>
       <nav className="navBar">
@@ -15,8 +26,8 @@ const App = () => {
       <NewPlayerForm />
 
       <Routes>
-        <Route path="/" element={<AllPlayers />} />
-        <Route path="/players/:id" element={<SinglePlayer />} />
+        <Route path="/" element={<AllPlayers />} players={players} />
+        <Route path="/players/:id" element={<PlayerDetail />} />
       </Routes>
     </>
   );

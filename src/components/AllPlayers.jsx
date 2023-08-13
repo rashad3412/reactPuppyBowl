@@ -1,7 +1,10 @@
 import { fetchAllPlayers } from "../Api";
-import SinglePlayer from "./SinglePlayer";
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import PlayerDetail from "../PlayerDetail";
+import PlayerItem from "./PlayerItem";
 
 const AllPlayers = () => {
   // Render all players in competition
@@ -19,7 +22,7 @@ const AllPlayers = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = (id) => {
-    navigate(`/players/${id}`);
+    navigate(`/players/${id}`, { state: { id } });
   };
 
   return (
@@ -28,7 +31,7 @@ const AllPlayers = () => {
       {players?.map((player) => {
         console.log(player);
         return (
-          <SinglePlayer
+          <PlayerItem
             key={player.id}
             id={player.id}
             handleButtonClick={handleButtonClick}
