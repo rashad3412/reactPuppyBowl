@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import PlayerItem from "./components/PlayerItem";
-import { fetchSinglePlayers } from "./Api";
+import PlayerItem from "./PlayerItem";
+import { fetchSinglePlayers } from "../Api";
 import { useParams } from "react-router-dom";
-
 const PlayerDetail = () => {
   const [player, setPlayer] = useState(null);
   const params = useParams();
@@ -16,11 +15,12 @@ const PlayerDetail = () => {
   }, [params.id]);
 
   return (
-    player && (
-      <div>
-        <PlayerItem player={player} />
-      </div>
-    )
+    <div>
+      <PlayerItem player={player} isSinglePlayer />
+      <p>{player?.status}</p>
+      <p>{player?.breed}</p>
+      <p>{player?.teamId}</p>
+    </div>
   );
 };
 

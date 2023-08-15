@@ -1,25 +1,17 @@
-import { Link } from "react-router-dom";
-import { fetchSinglePlayers } from "../Api";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const PlayerItem = ({ id }) => {
-  const [player, setPlayer] = useState(null);
-  console.log(player);
+const PlayerItem = ({ player, isSinglePlayer }) => {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (id) {
-      const onePlayer = async () => {
-        const data = await fetchSinglePlayers(id);
-        setPlayer(data);
-      };
-      onePlayer();
-    }
-  }, [id]);
+  function handleButtonClick() {
+    navigate(`/players/${player.id}`);
+  }
   return (
     <div className="pets">
       <h1>{player?.name}</h1>
       <img src={player?.imageUrl} width="200px" height="200px" />
-      <Link to={`/players/${player?.id}`}>Player</Link>
+      {/* <Link to={`/players/${player?.id}`}>Player</Link> */}
+      {!isSinglePlayer && <button onClick={handleButtonClick}>Player</button>}
     </div>
   );
 };
