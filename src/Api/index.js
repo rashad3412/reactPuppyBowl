@@ -3,7 +3,6 @@ const cohortName = "2302-ACC-ET-PT-B";
 const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}`;
 
 const fetchAllPlayers = async () => {
-  console.log("You did it");
   try {
     const response = await fetch(`${APIURL}/players`);
     const puppies = await response.json();
