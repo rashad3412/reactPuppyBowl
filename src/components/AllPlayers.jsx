@@ -19,7 +19,7 @@ const AllPlayers = () => {
 
   return (
     // Mapping over each player
-    <div className="pets">
+    <div>
       {players?.map((player) => {
         return <PlayerItem key={player.id} player={player} />;
       })}

@@ -7,7 +7,8 @@ const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}`;
 const NewPlayerForm = () => {
   const [breed, setBreed] = useState("");
   const [team, setTeam] = useState("");
-  const [add, setAdd] = useState(" ");
+  const [name, setName] = useState(" ");
+  const [seacrh, setSearch] = useState("");
 
   const handleBreedSearch = (event) => {
     setBreed(event.target.value);
@@ -17,11 +18,15 @@ const NewPlayerForm = () => {
     setTeam(event.target.value);
   };
 
-  const handleAdd = (event) => {
-    setAdd(event.target.value);
+  const handleName = (event) => {
+    setName(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
     // prevents reloading
     event.preventDefault();
 
@@ -34,10 +39,8 @@ const NewPlayerForm = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            Add: {
-              breed: "test",
-              name: "test",
-            },
+            breed,
+            name,
           }),
         });
         const result = await response.json();
@@ -48,21 +51,14 @@ const NewPlayerForm = () => {
       }
     };
 
-    // const teamSearch =  () => {
-    //   try {
-    //     const response = await fetch(
-    //       `${APIURL}/teams`
-    //     )
-    //     const result = await response.json()
-    //     console.log(result)
-    //   }catch(err){
-    //     console.error(err)
-    //   }
+    await addPlayer();
 
     // clears form back to default
+
     setBreed("");
     setTeam("");
-    setAdd(addPlayer);
+    setName("");
+    setSearch("");
   };
 
   return (
@@ -78,10 +74,18 @@ const NewPlayerForm = () => {
         />
         <label htmlFor="text">Team:</label>
         <input type="text" value={team} onChange={handleTeamSearch} />
-        <label htmlFor="term">Add:</label>
-        <input type="text" value={add} onChange={handleAdd} />
+        <label htmlFor="text">Name:</label>
+        <input type="text" value={name} onChange={handleName} />
         <button type="submit">Submit</button>
       </form>
+      <label htmlFor="search"></label>
+      <input
+        className="search"
+        type="text"
+        value={seacrh}
+        onChange={handleSearch}
+      />
+      <button type="submit">Search</button>
     </div>
   );
 };
