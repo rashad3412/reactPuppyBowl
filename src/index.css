@@ -5,6 +5,7 @@
   align-items: flex-start;
   height: 100%;
   text-align: center;
+  margin: 10px;
 }
 
 .navBar {
@@ -15,4 +16,37 @@
 
 .search {
   margin: 10px;
+}
+
+.allplayers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.b {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#button {
+  height: 20px;
+  position: relative;
+  top: 10px;
+}
+
+.newFormat {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
 }

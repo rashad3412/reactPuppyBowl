@@ -21,4 +21,20 @@ const fetchSinglePlayers = async (playerId) => {
   }
 };
 
-export { fetchAllPlayers, fetchSinglePlayers };
+const removePlayer = async (playerId) => {
+  try {
+    const response = await fetch(`${APIURL}/players/${playerId}`, {
+      method: "DELETE",
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(
+      `Error, trouble removing player #${playerId} from the roster`,
+      error
+    );
+  }
+};
+
+export { fetchAllPlayers, fetchSinglePlayers, removePlayer };
